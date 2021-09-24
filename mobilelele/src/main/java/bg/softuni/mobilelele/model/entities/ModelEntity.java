@@ -1,6 +1,9 @@
 package bg.softuni.mobilelele.model.entities;
 
+import bg.softuni.mobilelele.model.entities.enums.CategoryEnum;
+
 import javax.persistence.*;
+import java.time.Instant;
 
 @Entity
 @Table(name = "models")
@@ -71,5 +74,10 @@ public class ModelEntity extends BaseEntity{
     public ModelEntity setBrand(BrandEntity brand) {
         this.brand = brand;
         return this;
+    }
+
+    @PrePersist
+    public void beforeCreate(){
+        setCreated(Instant.now());
     }
 }
