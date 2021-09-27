@@ -1,30 +1,32 @@
 package bg.softuni.mobilelele.model.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-import java.time.Instant;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
 public class UserEntity extends BaseEntity{
 
-    @Column(unique = true, nullable = false)
+    @Column(unique = true,nullable = false)
     private String username;
-    @Column
-    private String firstName;
-    @Column
-    private String lastName;
-    @Column
-    private Boolean isActive;
-    @OneToOne
-    private UserRole role;
-    @Column
-    private String imageUrl;
 
-    public UserEntity() {
-    }
+    @Column
+    private String password;
+
+    @Column(name = "first_name")
+    private String firstName;
+
+    @Column(name = "last_name")
+    private String lastName;
+
+    @Column(name = "is_active")
+    private boolean isActive;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    private List<UserRoleEntity> roles;
+
+    @Column(name = "image_url")
+    private String imageUrl;
 
     public String getUsername() {
         return username;
@@ -32,6 +34,15 @@ public class UserEntity extends BaseEntity{
 
     public UserEntity setUsername(String username) {
         this.username = username;
+        return this;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public UserEntity setPassword(String password) {
+        this.password = password;
         return this;
     }
 
@@ -53,21 +64,21 @@ public class UserEntity extends BaseEntity{
         return this;
     }
 
-    public Boolean getActive() {
+    public boolean isActive() {
         return isActive;
     }
 
-    public UserEntity setActive(Boolean active) {
+    public UserEntity setActive(boolean active) {
         isActive = active;
         return this;
     }
 
-    public UserRole getRole() {
-        return role;
+    public List<UserRoleEntity> getRoles() {
+        return roles;
     }
 
-    public UserEntity setRole(UserRole role) {
-        this.role = role;
+    public UserEntity setRoles(List<UserRoleEntity> roles) {
+        this.roles = roles;
         return this;
     }
 

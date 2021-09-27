@@ -4,42 +4,38 @@ import bg.softuni.mobilelele.model.entities.enums.EngineEnum;
 import bg.softuni.mobilelele.model.entities.enums.TransmissionEnum;
 
 import javax.persistence.*;
-
 import java.math.BigDecimal;
-
-import static javax.persistence.EnumType.STRING;
 
 @Entity
 @Table(name = "offers")
 public class OfferEntity extends BaseEntity{
 
-    /*.
- created – a date and time.
- modified – a date and time.
- model – the model of a car.
- seller – a user that sells the car.
-     */
-    @Column(columnDefinition = "Text")
+    @Column(columnDefinition = "TEXT")
     private String description;
-    @Enumerated(STRING)
-    @Column(nullable = false)
-    private EngineEnum engine;
-    @Column
-    private String imageUrl;
-    @Column(nullable = false)
-    private Integer mileage;
-    @Column()
-    private BigDecimal price;
-    @Enumerated(STRING)
-    @Column(nullable = false)
-    private TransmissionEnum transmission;
-    @Column
-    private int year;
-    @OneToOne
-    private ModelEntity module;
 
-    public OfferEntity() {
-    }
+    @Enumerated(EnumType.STRING)
+    private EngineEnum engine;
+
+    @Column(name = "image_url")
+    private String imageUrl;
+
+    @Column
+    private Integer mileage;
+
+    @Column
+    private BigDecimal price;
+
+    @Enumerated(EnumType.STRING)
+    private TransmissionEnum transmission;
+
+    @Column
+    private Integer year;
+
+    @ManyToOne
+    private ModelEntity model;
+
+    @ManyToOne
+    private UserEntity seller;
 
     public String getDescription() {
         return description;
@@ -54,7 +50,7 @@ public class OfferEntity extends BaseEntity{
         return engine;
     }
 
-    public OfferEntity  setEngine(EngineEnum engine) {
+    public OfferEntity setEngine(EngineEnum engine) {
         this.engine = engine;
         return this;
     }
@@ -95,21 +91,30 @@ public class OfferEntity extends BaseEntity{
         return this;
     }
 
-    public int getYear() {
+    public Integer getYear() {
         return year;
     }
 
-    public OfferEntity setYear(int year) {
+    public OfferEntity setYear(Integer year) {
         this.year = year;
         return this;
     }
 
-    public ModelEntity getModule() {
-        return module;
+    public ModelEntity getModel() {
+        return model;
     }
 
-    public OfferEntity setModule(ModelEntity module) {
-        this.module = module;
+    public OfferEntity setModel(ModelEntity model) {
+        this.model = model;
+        return this;
+    }
+
+    public UserEntity getSeller() {
+        return seller;
+    }
+
+    public OfferEntity setSeller(UserEntity seller) {
+        this.seller = seller;
         return this;
     }
 }

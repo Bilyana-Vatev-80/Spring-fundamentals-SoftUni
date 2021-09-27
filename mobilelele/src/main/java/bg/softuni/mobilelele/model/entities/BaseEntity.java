@@ -8,14 +8,22 @@ public abstract class BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    private String name;
-
+    protected Long id;
     @Column(nullable = false)
-    private Instant created;
+    protected Instant created;
+    @Column(nullable = false)
+    protected Instant modified;
 
-    private Integer modified;
+    @PrePersist
+    public void prePersist(){
+        setCreated(Instant.now());
+        setModified(Instant.now());
+    }
+
+    @PreUpdate
+    public void preUpdate(){
+        setModified(Instant.now());
+    }
 
     public Long getId() {
         return id;
@@ -35,11 +43,11 @@ public abstract class BaseEntity {
         return this;
     }
 
-    public Integer getModified() {
+    public Instant getModified() {
         return modified;
     }
 
-    public BaseEntity setModified(Integer modified) {
+    public BaseEntity setModified(Instant modified) {
         this.modified = modified;
         return this;
     }

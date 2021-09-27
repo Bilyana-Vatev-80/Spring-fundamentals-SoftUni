@@ -1,8 +1,13 @@
 package bg.softuni.mobilelele.reposotories;
 
-import bg.softuni.mobilelele.model.entities.ModelEntity;
 import bg.softuni.mobilelele.model.entities.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface UserRepository extends JpaRepository<UserEntity, Long> {
+import java.util.Optional;
+
+@Repository
+public interface UserRepository extends JpaRepository<UserEntity,Long> {
+
+    Optional<UserEntity> findByUsername(String username);
 }

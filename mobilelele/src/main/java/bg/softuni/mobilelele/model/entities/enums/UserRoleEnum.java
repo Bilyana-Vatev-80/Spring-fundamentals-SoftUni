@@ -1,5 +1,5 @@
 package bg.softuni.mobilelele.model.entities.enums;
 
-public enum RoleEnum {
+public enum UserRoleEnum {
     USER, ADMIN;
 }

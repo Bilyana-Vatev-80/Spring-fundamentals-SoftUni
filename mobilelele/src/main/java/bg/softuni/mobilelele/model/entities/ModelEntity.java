@@ -5,22 +5,29 @@ import bg.softuni.mobilelele.model.entities.enums.CategoryEnum;
 import javax.persistence.*;
 import java.time.Instant;
 
+import static javax.persistence.EnumType.STRING;
+
 @Entity
 @Table(name = "models")
-public class ModelEntity extends BaseEntity{
-
-    @Column
+public class ModelEntity extends BaseEntity {
+    @Column(nullable = false, unique = true)
     private String name;
-    @Enumerated(value = EnumType.STRING)
-    @Column(nullable = false)
+
+    @Enumerated(EnumType.STRING)
     private CategoryEnum category;
-    @Column(nullable = false)
+
+    @Column(name = "image_url", length = 1024)
     private String imageUrl;
-    @Column(nullable = false)
+
+    @Column(name = "start_year")
     private Integer startYear;
+
+    @Column(name = "end_year")
     private Integer endYear;
+
     @ManyToOne
     private BrandEntity brand;
+
 
     public String getName() {
         return name;
@@ -74,10 +81,5 @@ public class ModelEntity extends BaseEntity{
     public ModelEntity setBrand(BrandEntity brand) {
         this.brand = brand;
         return this;
-    }
-
-    @PrePersist
-    public void beforeCreate(){
-        setCreated(Instant.now());
     }
 }
