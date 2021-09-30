@@ -2,7 +2,7 @@ package bg.softuni.mobilelele.web;
 
 import bg.softuni.mobilelele.model.banding.UserLoginBindingModel;
 import bg.softuni.mobilelele.model.service.UserLoginServiceModel;
-import bg.softuni.mobilelele.services.UserService;
+import bg.softuni.mobilelele.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;

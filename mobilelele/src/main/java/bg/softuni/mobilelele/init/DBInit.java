@@ -1,8 +1,8 @@
 package bg.softuni.mobilelele.init;
 
-import bg.softuni.mobilelele.services.BrandService;
-import bg.softuni.mobilelele.services.ModelService;
-import bg.softuni.mobilelele.services.UserService;
+import bg.softuni.mobilelele.service.BrandService;
+import bg.softuni.mobilelele.service.ModelService;
+import bg.softuni.mobilelele.service.UserService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
