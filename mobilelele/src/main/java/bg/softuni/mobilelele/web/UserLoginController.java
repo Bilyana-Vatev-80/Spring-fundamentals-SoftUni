@@ -27,6 +27,7 @@ public class UserLoginController {
 
     @PostMapping("/users/login")
     public String login(UserLoginBindingModel userLoginBindingModel){
+
         boolean loginSuccessful = userService
                 .login(new UserLoginServiceModel()
                         .setUsername(userLoginBindingModel.getUsername())
@@ -36,6 +37,9 @@ public class UserLoginController {
                 userLoginBindingModel.getUsername(),
                 loginSuccessful);
 
+        if(loginSuccessful){
+            return "redirect:/";
+        }
 
         return "redirect:/users/login";
     }
