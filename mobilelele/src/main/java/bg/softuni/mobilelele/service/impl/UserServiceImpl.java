@@ -4,6 +4,7 @@ import bg.softuni.mobilelele.model.entity.UserEntity;
 import bg.softuni.mobilelele.model.entity.UserRoleEntity;
 import bg.softuni.mobilelele.model.entity.enums.UserRoleEnum;
 import bg.softuni.mobilelele.model.service.UserLoginServiceModel;
+import bg.softuni.mobilelele.model.service.UserRegistrationServiceModel;
 import bg.softuni.mobilelele.reposotory.UserRepository;
 import bg.softuni.mobilelele.reposotory.UserRoleRepository;
 import bg.softuni.mobilelele.service.UserService;
@@ -97,6 +98,9 @@ public class UserServiceImpl implements UserService {
                         .setUserName(loggedInUser.getUsername())
                         .setFirstName(loggedInUser.getFirstName())
                         .setLastName(loggedInUser.getLastName());
+
+                loggedInUser.getRoles().
+                        forEach(r -> currentUser.addRole(r.getName()));
             }
             return success;
         }
@@ -106,5 +110,37 @@ public class UserServiceImpl implements UserService {
     @Override
     public void logout() {
         currentUser.clean();
+    }
+
+    @Override
+    public void registеrAndLoginUser(UserRegistrationServiceModel userRegistrationServiceModel) {
+        UserRoleEntity userRole = userRoleRepository.findByName(UserRoleEnum.USER);
+
+        UserEntity newUser = new UserEntity();
+
+        newUser.
+                setUsername(userRegistrationServiceModel.getUsername()).
+                setFirstName(userRegistrationServiceModel.getFirstName()).
+                setLastName(userRegistrationServiceModel.getLastName()).
+                setActive(true).
+                setPassword(passwordEncoder.encode(userRegistrationServiceModel.getPassword())).
+                setRoles(Set.of(userRole));
+
+        newUser = userRepository.save(newUser);
+
+        login(newUser);
+    }
+
+    public boolean isUserNameFree(String username) {
+        return userRepository.findByUsernameIgnoreCase(username).
+                isEmpty();
+    }
+
+    private void login(UserEntity user) {
+        currentUser.
+                setLoggedIn(true).
+                setUserName(user.getUsername()).
+                setFirstName(user.getFirstName()).
+                setLastName(user.getLastName());
     }
 }
