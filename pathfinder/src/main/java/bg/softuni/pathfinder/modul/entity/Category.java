@@ -9,21 +9,12 @@ import java.util.Set;
 @Table(name = "categories")
 public class Category extends BaseEntity{
 
-    @Column(nullable = false, unique = true)
-    @Enumerated(EnumType.STRING)
-    private CategoryEnum name;
     @Column(columnDefinition = "TEXT")
     private String description;
-    @ManyToMany(mappedBy = "categories")
-    private Set<Route> routes;
+    @Enumerated(EnumType.STRING)
+    private CategoryEnum name;
 
-    public CategoryEnum getName() {
-        return name;
-    }
-
-    public Category setName(CategoryEnum name) {
-        this.name = name;
-        return this;
+    public Category() {
     }
 
     public String getDescription() {
@@ -35,12 +26,12 @@ public class Category extends BaseEntity{
         return this;
     }
 
-    public Set<Route> getRoutes() {
-        return routes;
+    public CategoryEnum getName() {
+        return name;
     }
 
-    public Category setRoutes(Set<Route> routes) {
-        this.routes = routes;
+    public Category setName(CategoryEnum name) {
+        this.name = name;
         return this;
     }
 }

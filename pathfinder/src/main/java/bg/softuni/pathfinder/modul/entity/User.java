@@ -18,7 +18,9 @@ public class User extends BaseEntity{
     private String password;
     @Column
     private int age;
-    @ManyToMany
+    @Column
+    private String email;
+    @ManyToMany(fetch = FetchType.EAGER)
     private Set<Role> roles;
     @Enumerated(EnumType.STRING)
     private LevelEnum level;
@@ -56,6 +58,15 @@ public class User extends BaseEntity{
 
     public User setAge(int age) {
         this.age = age;
+        return this;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public User setEmail(String email) {
+        this.email = email;
         return this;
     }
 

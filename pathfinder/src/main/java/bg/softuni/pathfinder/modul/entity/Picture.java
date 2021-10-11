@@ -9,14 +9,17 @@ import javax.persistence.Table;
 @Table(name = "pictures")
 public class Picture extends BaseEntity{
 
-    @Column(nullable = false)
+    @Column
     private String title;
-    @Column(nullable = false, columnDefinition = "TEXT")
+    @Column(columnDefinition = "TEXT")
     private String url;
     @ManyToOne
     private User author;
     @ManyToOne
     private Route route;
+
+    public Picture() {
+    }
 
     public String getTitle() {
         return title;
