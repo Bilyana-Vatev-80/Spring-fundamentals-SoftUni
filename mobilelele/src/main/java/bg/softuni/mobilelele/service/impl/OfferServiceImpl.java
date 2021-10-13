@@ -3,6 +3,7 @@ package bg.softuni.mobilelele.service.impl;
 import bg.softuni.mobilelele.model.entity.OfferEntity;
 import bg.softuni.mobilelele.model.entity.enums.EngineEnum;
 import bg.softuni.mobilelele.model.entity.enums.TransmissionEnum;
+import bg.softuni.mobilelele.model.view.OfferDetailsView;
 import bg.softuni.mobilelele.model.view.OfferSummaryView;
 import bg.softuni.mobilelele.reposotory.ModelRepository;
 import bg.softuni.mobilelele.reposotory.OfferRepository;
@@ -75,11 +76,36 @@ public class OfferServiceImpl implements OfferService {
                 collect(Collectors.toList());
     }
 
+
+
+
+    @Override
+    public OfferDetailsView findById(Long id) {
+        OfferDetailsView offerDetailsView = this.offerRepository.findById(id).map(this::mapDetailsView).get();
+        return offerDetailsView;
+    }
+
+    @Override
+    public void deleteOffer(Long id) {
+        offerRepository.deleteById(id);
+    }
+
+
+    private OfferDetailsView mapDetailsView(OfferEntity offer) {
+        OfferDetailsView offerDetailsView = this.modelMapper.map(offer, OfferDetailsView.class);
+        offerDetailsView.setModel(offer.getModel().getName());
+        offerDetailsView.setBrand(offer.getModel().getBrand().getName());
+        offerDetailsView.setSellerFullName(offer.getSeller().getFirstName() + " " + offer.getSeller().getLastName());
+
+        return offerDetailsView;
+    }
+
     private OfferSummaryView map(OfferEntity offerEntity) {
         OfferSummaryView summaryView = this.modelMapper
                 .map(offerEntity, OfferSummaryView.class);
 
         summaryView.setModel(offerEntity.getModel().getName());
+        summaryView.setBrand(offerEntity.getModel().getBrand().getName());
 
         return summaryView;
     }
