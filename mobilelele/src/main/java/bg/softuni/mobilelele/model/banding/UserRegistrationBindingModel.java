@@ -1,6 +1,7 @@
 package bg.softuni.mobilelele.model.banding;
 
 
+import bg.softuni.mobilelele.model.validator.UniqUserName;
 import com.sun.istack.NotNull;
 
 import javax.validation.constraints.Size;
@@ -15,6 +16,7 @@ public class UserRegistrationBindingModel {
     private String lastName;
     private String password;
     private String confirmPassword;
+    @UniqUserName
     private String username;
 
     public String getUsername() {
