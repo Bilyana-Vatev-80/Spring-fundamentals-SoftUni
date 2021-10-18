@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -13,12 +14,12 @@ public class Order extends BaseEntity{
 
     @Column(nullable = false)
     private String name;
-    @Column(columnDefinition = "TEXT",nullable = false)
-    private String description;
     @Column(nullable = false)
     private BigDecimal price;
     @Column(nullable = false)
     private LocalDateTime orderTime;
+    @Column(columnDefinition = "TEXT",nullable = false)
+    private String description;
     @ManyToOne
     private Category category;
     @ManyToOne

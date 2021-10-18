@@ -1,6 +1,6 @@
 package com.example.Coffee.Shop.Application.model.service;
 
-import javax.persistence.Column;
+
 
 public class UserServiceModel {
 

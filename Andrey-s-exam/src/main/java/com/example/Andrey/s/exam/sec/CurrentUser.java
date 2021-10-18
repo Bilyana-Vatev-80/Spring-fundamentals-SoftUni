@@ -1,4 +1,4 @@
-package com.example.Coffee.Shop.Application.currentUser;
+package com.example.Andrey.s.exam.sec;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.SessionScope;

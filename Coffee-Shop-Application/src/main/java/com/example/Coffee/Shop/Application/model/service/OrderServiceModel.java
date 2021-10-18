@@ -4,18 +4,17 @@ import com.example.Coffee.Shop.Application.model.entity.Category;
 import com.example.Coffee.Shop.Application.model.entity.CategoryNameEnum;
 import com.example.Coffee.Shop.Application.model.entity.User;
 
-import javax.persistence.Column;
-import javax.persistence.ManyToOne;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class OrderServiceModel {
 
     private Long id;
     private String name;
-    private String description;
     private BigDecimal price;
     private LocalDateTime orderTime;
+    private String description;
     private CategoryNameEnum category;
     private User employee;
 
@@ -40,15 +39,6 @@ public class OrderServiceModel {
         return this;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public OrderServiceModel setDescription(String description) {
-        this.description = description;
-        return this;
-    }
-
     public BigDecimal getPrice() {
         return price;
     }
@@ -64,6 +54,15 @@ public class OrderServiceModel {
 
     public OrderServiceModel setOrderTime(LocalDateTime orderTime) {
         this.orderTime = orderTime;
+        return this;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public OrderServiceModel setDescription(String description) {
+        this.description = description;
         return this;
     }
 

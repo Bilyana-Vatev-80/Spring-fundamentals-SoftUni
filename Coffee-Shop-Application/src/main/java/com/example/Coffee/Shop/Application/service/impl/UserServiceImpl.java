@@ -1,15 +1,20 @@
 package com.example.Coffee.Shop.Application.service.impl;
 
-import com.example.Coffee.Shop.Application.currentUser.CurrentUser;
 import com.example.Coffee.Shop.Application.model.entity.User;
 import com.example.Coffee.Shop.Application.model.service.UserServiceModel;
+import com.example.Coffee.Shop.Application.model.view.UserViewModel;
 import com.example.Coffee.Shop.Application.repository.UserRepository;
+import com.example.Coffee.Shop.Application.security.CurrentUser;
 import com.example.Coffee.Shop.Application.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class UserServiceImpl implements UserService {
+
     private final UserRepository userRepository;
     private final ModelMapper modelMapper;
     private final CurrentUser currentUser;
@@ -23,7 +28,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserServiceModel registerUser(UserServiceModel userServiceModel) {
         User user = modelMapper.map(userServiceModel, User.class);
-        return modelMapper.map(userRepository.save(user),UserServiceModel.class);
+        return modelMapper.map(userRepository.save(user), UserServiceModel.class);
     }
 
     @Override
@@ -43,5 +48,19 @@ public class UserServiceImpl implements UserService {
     public User findById(Long id) {
         return userRepository.findById(id)
                 .orElse(null);
+    }
+
+    @Override
+    public List<UserViewModel> findAllUserAndCountOfOrdersByCountDesc() {
+        return userRepository.findAllByOrderCountByOrdersDesc()
+                .stream()
+                .map(user -> {
+                    UserViewModel userViewModel = new UserViewModel();
+                    userViewModel.setUsername(user.getUsername());
+                    userViewModel.setCountOfOrders(user.getOrders().size());
+
+                    return userViewModel;
+                })
+                .collect(Collectors.toList());
     }
 }

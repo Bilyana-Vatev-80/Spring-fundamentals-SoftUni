@@ -5,11 +5,11 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 @Component
-public class DataBaseInit implements CommandLineRunner {
+public class DatabaseInit implements CommandLineRunner {
 
     private final CategoryService categoryService;
 
-    public DataBaseInit(CategoryService categoryService) {
+    public DatabaseInit(CategoryService categoryService) {
         this.categoryService = categoryService;
     }
 

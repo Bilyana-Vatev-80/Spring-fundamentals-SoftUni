@@ -1,6 +1,7 @@
 package com.example.Coffee.Shop.Application.model.binding;
 
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 public class UserRegisterBindingModel {
@@ -10,6 +11,7 @@ public class UserRegisterBindingModel {
     private String firstName;
     @Size(min = 5, max = 20)
     private String lastName;
+    @NotBlank
     @Email
     private String email;
     @Size(min = 3)

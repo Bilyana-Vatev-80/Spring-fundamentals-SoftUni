@@ -1,13 +1,12 @@
 package com.example.Coffee.Shop.Application.model.entity;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "categories")
 public class Category extends BaseEntity{
 
-    @Enumerated(EnumType.STRING)
+    @Enumerated(value = EnumType.STRING)
     private CategoryNameEnum name;
     @Column(nullable = false)
     private Integer neededTime;

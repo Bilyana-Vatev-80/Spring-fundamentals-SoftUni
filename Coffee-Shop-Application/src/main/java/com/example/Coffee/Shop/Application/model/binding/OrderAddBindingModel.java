@@ -4,20 +4,20 @@ import com.example.Coffee.Shop.Application.model.entity.Category;
 import com.example.Coffee.Shop.Application.model.entity.CategoryNameEnum;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PastOrPresent;
-import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class OrderAddBindingModel {
 
     @Size(min = 3, max = 20)
-    @NotNull
     private String name;
-    @Positive
     @NotNull
+    @DecimalMin("0")
     private BigDecimal price;
     @PastOrPresent
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
@@ -25,7 +25,6 @@ public class OrderAddBindingModel {
     @NotNull
     private CategoryNameEnum category;
     @Size(min = 5)
-    @NotNull
     private String description;
 
     public OrderAddBindingModel() {

@@ -19,27 +19,29 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public void initCategories() {
-        if(this.categoryRepository.count() != 0){
+        if(categoryRepository.count() != 0){
             return;
         }
+
         Arrays.stream(CategoryNameEnum.values())
                 .forEach(categoryNameEnum -> {
                     Category category = new Category();
                     category.setName(categoryNameEnum);
                     switch (categoryNameEnum){
-                        case Coffee:
-                            category.setNeededTime(2);
+                        case Cake:
+                            category.setNeededTime(10);
                             break;
                         case Drink:
                             category.setNeededTime(1);
                             break;
-                        case Cake:
-                            category.setNeededTime(10);
+                        case Coffee:
+                            category.setNeededTime(2);
                             break;
                         case Other:
                             category.setNeededTime(5);
                             break;
                     }
+
                     categoryRepository.save(category);
                 });
     }
